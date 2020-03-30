@@ -2,6 +2,7 @@ package cz.seky.backend;
 
 import com.vaadin.flow.component.UI;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.CredentialsProvider;
@@ -11,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -53,6 +55,9 @@ public class HttpGet {
      * */
     public String callUrl(String httpRequest) {
 
+
+
+
         String uri = httpRequest;
 
 
@@ -81,7 +86,7 @@ public class HttpGet {
         }
         return "FALSE";
     }
-
+    
 
 }
 

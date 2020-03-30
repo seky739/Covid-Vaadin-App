@@ -21,12 +21,15 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import cz.seky.backend.GDataDownload;
 import cz.seky.backend.objects.Infected;
 import cz.seky.backend.objects.MasterTested;
 import cz.seky.backend.HttpGet;
 import cz.seky.views.main.MainView;
 
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -40,7 +43,13 @@ public class TestedView extends Div {
 
     public TestedView() {
         setId("tested");
-        add(getChartTested(),getChartInfected()); // AppLayout
+
+
+            GDataDownload gDataDownload=new GDataDownload();
+
+
+
+        add(getChartTested(),getChartInfected(),getChartGoogle()); // AppLayout
 
     }
 
@@ -224,6 +233,78 @@ public class TestedView extends Div {
         return apexCharts;
     }
 
+
+
+    public Component getChartGoogle(){
+
+        GDataDownload gDataDownload=new GDataDownload();
+
+        Integer[] data=new Integer[gDataDownload.getNumbers().size()];
+        String[] xaxisLabel=new String[gDataDownload.getLabels().size()];
+       for (int i=0;i<data.length;i++){
+           data[i]=gDataDownload.getNumbers().get(i);
+           xaxisLabel[i]=gDataDownload.getLabels().get(i);
+       }
+
+
+        ApexCharts apexCharts = new ApexCharts();
+        Series<Integer> series = new Series<Integer>();
+        series.setData(data);
+        series.setName("Počet pozitivních případů v kraji");
+
+
+        // Chart
+        Chart chart = new Chart();
+        //chart.setHeight("350");
+        chart.setType(Type.line);
+        Zoom zoom = new Zoom();
+        zoom.setEnabled(true);
+        chart.setZoom(zoom);
+
+        // Labels
+        DataLabels dataLabels = new DataLabels();
+        dataLabels.setEnabled(false);
+
+        // Stroke
+        Stroke stroke = new Stroke();
+        stroke.setCurve(Curve.straight);
+
+        // Title
+        TitleSubtitle titleSubtilte = new TitleSubtitle();
+        titleSubtilte.setText("Počet pozitivních nakažených dle krajů");
+        titleSubtilte.setAlign(Align.left);
+
+        // Grid
+        Grid grid = new Grid();
+        Row row = new Row();
+        row.setColors(Arrays.asList(new String[]{"#f3f3f3", "transparent"}));
+        row.setOpacity(0.5);
+        grid.setRow(row);
+
+        // Xaxis
+        XAxis xaxis = new XAxis();
+        xaxis.setCategories(Arrays.asList(xaxisLabel));
+
+        // Tooltip
+        Tooltip tooltip = new Tooltip();
+        tooltip.setEnabled(true);
+
+        // Include them all
+        series.setType(SeriesType.column);
+
+        apexCharts.setSeries(series);
+        apexCharts.setChart(chart);
+        apexCharts.setDataLabels(dataLabels);
+        apexCharts.setStroke(stroke);
+        apexCharts.setTitle(titleSubtilte);
+        apexCharts.setGrid(grid);
+        apexCharts.setXaxis(xaxis);
+        apexCharts.setTooltip(tooltip);
+
+        // Render them and include into the content
+
+        return apexCharts;
+    }
 
 
 

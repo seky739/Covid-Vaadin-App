@@ -18,7 +18,6 @@ import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;import com.vaadin.flow.theme.lumo.Lumo;
 
 import cz.seky.views.tests.TestedView;
-import cz.seky.views.infected.InfectedView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -48,8 +47,8 @@ public class MainView extends AppLayout {
 
     private static Tab[] getAvailableTabs() {
         final List<Tab> tabs = new ArrayList<>();
-        tabs.add(createTab("Number of Test", TestedView.class));
-        tabs.add(createTab("Infected", InfectedView.class));
+        tabs.add(createTab("Covid-Info", TestedView.class));
+
         return tabs.toArray(new Tab[tabs.size()]);
     }
 

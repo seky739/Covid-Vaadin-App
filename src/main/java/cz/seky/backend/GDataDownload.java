@@ -21,6 +21,8 @@ import org.jopendocument.dom.spreadsheet.SpreadSheet;
 public class GDataDownload {
 
 
+    private static GDataDownload instance;
+
     private List<Integer> numbers=new ArrayList<>();
     private List<String> labels=new ArrayList<>();
 
@@ -35,9 +37,20 @@ public class GDataDownload {
         return labels;
     }
 
+    private GDataDownload() {
+    }
 
 
-    public GDataDownload() {
+    public static GDataDownload getInstance() {
+        if (instance == null) {
+            instance = new GDataDownload();
+            instance.getData();
+        }
+        return instance;
+    }
+
+
+    public void getData() {
         File spreadsheet = new File("test.ods");
         String url = ("https://docs.google.com/spreadsheets/d/10TMEdU8kxqdlbyGr7jLD4ioCmived2CnB6DKS8WELm0/export?format=ods");
 

@@ -17,7 +17,8 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;import com.vaadin.flow.theme.lumo.Lumo;
 
-import cz.seky.views.tests.TestedView;
+import cz.seky.views.khs.GCovidView;
+import cz.seky.views.mzcr.MzcrView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -47,7 +48,8 @@ public class MainView extends AppLayout {
 
     private static Tab[] getAvailableTabs() {
         final List<Tab> tabs = new ArrayList<>();
-        tabs.add(createTab("Covid-Info", TestedView.class));
+        tabs.add(createTab("Covid-MZCR", MzcrView.class));
+        tabs.add(createTab("Covid-KHS", GCovidView.class));
 
         return tabs.toArray(new Tab[tabs.size()]);
     }

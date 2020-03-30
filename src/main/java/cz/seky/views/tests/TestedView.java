@@ -5,6 +5,7 @@ import com.github.appreciated.apexcharts.config.*;
 import com.github.appreciated.apexcharts.config.chart.Type;
 import com.github.appreciated.apexcharts.config.chart.Zoom;
 import com.github.appreciated.apexcharts.config.grid.Row;
+import com.github.appreciated.apexcharts.config.series.SeriesType;
 import com.github.appreciated.apexcharts.config.stroke.Curve;
 import com.github.appreciated.apexcharts.config.subtitle.Align;
 import com.github.appreciated.apexcharts.helper.Series;
@@ -27,10 +28,11 @@ import java.util.Arrays;
 @Route(value = "tested", layout = MainView.class)
 @RouteAlias(value = "", layout = MainView.class)
 @PageTitle("Test in Czech Republic")
-@CssImport("styles/views/dashboard/dashboard-view.css")
+@CssImport("./styles/views/dashboard/dashboard-view.css")
 public class TestedView extends Div {
 
     Integer[] data;
+    Integer[] data2;
     String[] xaxisLabel;
 
 
@@ -40,20 +42,20 @@ public class TestedView extends Div {
 
         HttpGet httpGet=HttpGet.getInstance();
         String result=httpGet.callUrl("https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/testy.json");
-        System.out.println(result);
 
         Gson g = new Gson();
 
         MasterTested dates = g.fromJson(result, MasterTested.class);
-        System.out.println(dates.toString());
 
         add(new Label("Aktualizace provedena naposledy : "+dates.getModified()));
         add(new Label("           Zdroj : "+dates.getSource()));
 
         data=new Integer[dates.getData().length];
+        data2=new Integer[dates.getData().length];
         xaxisLabel=new String[data.length];
         for (int i=0;i<data.length;i++) {
             data[i] = dates.getData()[i].getTestDay();
+            data2[i]=dates.getData()[i].getTestFull();
             xaxisLabel[i]=dates.getData()[i].getDatum();
         }
 
@@ -70,6 +72,11 @@ public class TestedView extends Div {
         Series<Integer> series = new Series<Integer>();
         series.setData(data);
         series.setName("Testů za den");
+
+
+        Series<Integer> series2 = new Series<Integer>();
+        series2.setData(data2);
+        series2.setName("Testů celkem");
 
         // Chart
         Chart chart = new Chart();
@@ -89,7 +96,7 @@ public class TestedView extends Div {
 
         // Title
         TitleSubtitle titleSubtilte = new TitleSubtitle();
-        titleSubtilte.setText("Počet testů za den celkově za celou ČR");
+        titleSubtilte.setText("Počet testů za celou ČR");
         titleSubtilte.setAlign(Align.left);
 
         // Grid
@@ -108,7 +115,9 @@ public class TestedView extends Div {
         tooltip.setEnabled(true);
 
         // Include them all
-        apexCharts.setSeries(series);
+        series.setType(SeriesType.line);
+        series2.setType(SeriesType.line);
+        apexCharts.setSeries(series,series2);
         apexCharts.setChart(chart);
         apexCharts.setDataLabels(dataLabels);
         apexCharts.setStroke(stroke);

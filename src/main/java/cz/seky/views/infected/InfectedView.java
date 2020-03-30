@@ -25,7 +25,7 @@ import java.util.*;
 
 @Route(value = "infected", layout = MainView.class)
 @PageTitle("Infected in Czech Republic")
-@CssImport("styles/views/masterdetail/master-detail-view.css")
+@CssImport("./styles/views/masterdetail/master-detail-view.css")
 public class InfectedView extends Div {
 
 

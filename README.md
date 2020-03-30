@@ -1,3 +1,6 @@
+![Java CI with Maven](https://github.com/seky739/Covid-Vaadin-App/workflows/Java%20CI%20with%20Maven/badge.svg)
+
+
 # Covid-Vaadin-App
 Application to visualize COVID-19 in Czech Republic
 

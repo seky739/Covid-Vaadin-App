@@ -50,7 +50,13 @@ public class GDataDownload {
     }
 
 
-    public void getData() {
+    public void refresh(){
+        numbers.clear();
+        labels.clear();
+        instance.getData();
+    }
+
+    private void getData() {
         File spreadsheet = new File("test.ods");
         String url = ("https://docs.google.com/spreadsheets/d/10TMEdU8kxqdlbyGr7jLD4ioCmived2CnB6DKS8WELm0/export?format=ods");
 

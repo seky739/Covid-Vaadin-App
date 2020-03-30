@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -15,8 +17,11 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
+import cz.seky.backend.GDataDownload;
+import cz.seky.backend.MzcrDownload;
 import cz.seky.views.khs.GCovidView;
 import cz.seky.views.mzcr.MzcrView;
 
@@ -28,11 +33,23 @@ import cz.seky.views.mzcr.MzcrView;
 @Theme(value = Lumo.class, variant = Lumo.LIGHT)
 public class MainView extends AppLayout {
 
+    Button button = new Button("Refresh Data");
+
     private final Tabs menu;
 
     public MainView() {
+
+        button.addClickListener(buttonClickEvent -> {
+            MzcrDownload mzcrDownload = MzcrDownload.getInstance();
+            GDataDownload gDataDownload = GDataDownload.getInstance();
+            mzcrDownload.refresh();
+            gDataDownload.refresh();
+            UI.getCurrent().getPage().reload();
+        });
+
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, new DrawerToggle());
+        addToNavbar(button);
         menu = createMenuTabs();
         addToDrawer(menu);
     }

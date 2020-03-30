@@ -32,6 +32,10 @@ public class MzcrDownload {
         return instance;
     }
 
+    public void refresh(){
+        instance.prepareFirstChart();
+        instance.prepareSecondChart();
+    }
 
 
     private void prepareFirstChart(){

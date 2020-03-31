@@ -31,6 +31,9 @@ public class AreaCrView extends Div {
     public AreaCrView() {
         add(new Label(covid19Download.getHeaderInfo()));
         add(getChartGoogle());
+
+        setHeight("70%");
+        setWidth("70%");
     }
 
     public Component getChartGoogle() {

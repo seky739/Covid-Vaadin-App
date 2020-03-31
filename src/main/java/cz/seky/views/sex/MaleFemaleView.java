@@ -36,7 +36,8 @@ add(covid19Download.getHeaderInfo());
 
         add(createChart(covid19Download.getNumbersSexMaleField(), covid19Download.getLabelsSexMaleField(),"Počet pozitivních případů u mužů","Počet pozitivních případů u mužů dle věku"));
         add(createChart(covid19Download.getNumbersSexFemaleField(), covid19Download.getLabelsSexFemaleField(),"Počet pozitivních případů u žen","Počet pozitivních případů u žen dle věku"));
-
+        setHeight("70%");
+        setWidth("70%");
 
     }
 

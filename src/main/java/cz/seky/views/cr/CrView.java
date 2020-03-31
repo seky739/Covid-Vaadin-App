@@ -16,6 +16,8 @@ import com.github.appreciated.apexcharts.helper.Series;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
@@ -40,10 +42,15 @@ public class CrView extends Div {
         setId("tested");
         //add(getChartTested(), getChartInfected());//,getChartGoogle()); // AppLayout
 
-
-        //System.out.println(mzcrDownload.getTestedData().toString());
+        //System.out.println(mzcrDownload.getTestedData().toString())
+        //
         add(createChart(crServiceDownload.getTestedData(), crServiceDownload.getTestedData2(), crServiceDownload.getTestedXaxisLabel(),"Testů za den","Testů celkem","Počet testů za celou ČR"));
-        add(createChart(crServiceDownload.getInfectedData1(), crServiceDownload.getInfectedData2(), crServiceDownload.getTestedXaxisLabel(),"Počet nakažených za den","Počet nakažených celkem","Počet nakažených"));
+    add(createChart(crServiceDownload.getInfectedData1(), crServiceDownload.getInfectedData2(), crServiceDownload.getTestedXaxisLabel(),"Počet nakažených za den","Počet nakažených celkem","Počet nakažených"));
+
+        setHeight("60%");
+        setWidth("60%");
+
+
     }
 
 

@@ -1,4 +1,4 @@
-package cz.seky.views.khs;
+package cz.seky.views.area;
 
 import com.github.appreciated.apexcharts.ApexCharts;
 import com.github.appreciated.apexcharts.config.*;
@@ -10,15 +10,13 @@ import com.github.appreciated.apexcharts.config.stroke.Curve;
 import com.github.appreciated.apexcharts.config.subtitle.Align;
 import com.github.appreciated.apexcharts.helper.Series;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.spring.annotation.UIScope;
-import cz.seky.backend.GDataDownload;
+import cz.seky.backend.Covid19Download;
 import cz.seky.views.main.MainView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 
@@ -26,22 +24,23 @@ import java.util.Arrays;
 @org.springframework.stereotype.Component
 @UIScope
 @PageTitle("COVID-INFO")
-public class GCovidView extends Div {
+public class AreaCrView extends Div {
 
-    GDataDownload gDataDownload = GDataDownload.getInstance();
+    Covid19Download covid19Download = Covid19Download.getInstance();
 
-    public GCovidView() {
+    public AreaCrView() {
+        add(new Label(covid19Download.getHeaderInfo()));
         add(getChartGoogle());
     }
 
     public Component getChartGoogle() {
 
 
-        Integer[] data = new Integer[gDataDownload.getNumbers().size()];
-        String[] xaxisLabel = new String[gDataDownload.getLabels().size()];
+        Integer[] data = new Integer[covid19Download.getNumbersArea().size()];
+        String[] xaxisLabel = new String[covid19Download.getLabelsArea().size()];
         for (int i = 0; i < data.length; i++) {
-            data[i] = gDataDownload.getNumbers().get(i);
-            xaxisLabel[i] = gDataDownload.getLabels().get(i);
+            data[i] = covid19Download.getNumbersArea().get(i);
+            xaxisLabel[i] = covid19Download.getLabelsArea().get(i);
         }
 
 

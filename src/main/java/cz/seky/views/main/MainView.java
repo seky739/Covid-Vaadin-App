@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasComponents;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -21,11 +19,10 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-import cz.seky.backend.GDataDownload;
-import cz.seky.backend.MzcrDownload;
-import cz.seky.views.khs.GCovidView;
-import cz.seky.views.mzcr.MzcrView;
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.seky.views.area.AreaCrView;
+import cz.seky.views.baNews.BaNewsView;
+import cz.seky.views.sex.MaleFemaleView;
+import cz.seky.views.cr.CrView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -33,7 +30,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @JsModule("./styles/shared-styles.js")
 @PWA(name = "COVID-TEST", shortName = "COVID-TEST")
 @Theme(value = Lumo.class, variant = Lumo.LIGHT)
-@UIScope
 public class MainView extends AppLayout {
 
     //Button button = new Button("Refresh Data");
@@ -68,8 +64,10 @@ public class MainView extends AppLayout {
 
     private static Tab[] getAvailableTabs() {
         final List<Tab> tabs = new ArrayList<>();
-        tabs.add(createTab("Covid-MZCR", MzcrView.class));
-        tabs.add(createTab("Covid-KHS", GCovidView.class));
+        tabs.add(createTab("Covid-ČR", CrView.class));
+        tabs.add(createTab("Covid-Kraje", AreaCrView.class));
+        tabs.add(createTab("Covid-Pohlaví", MaleFemaleView.class));
+        tabs.add(createTab("BA-News", BaNewsView.class));
 
         return tabs.toArray(new Tab[tabs.size()]);
     }

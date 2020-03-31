@@ -2,6 +2,7 @@ package cz.seky.backend;
 
 import com.vaadin.flow.component.UI;
 
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -11,6 +12,8 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.*;
 import java.util.logging.Level;
@@ -20,6 +23,7 @@ import java.util.logging.Logger;
  * Trida pro zaslani http Getu pozdeji dodelam i post
  *
  * */
+@Component
 public class HttpGet {
 
     private CloseableHttpClient httpClient;

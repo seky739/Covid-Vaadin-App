@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.apache.http.HttpHost;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.jopendocument.dom.spreadsheet.MutableCell;
 import org.jopendocument.dom.spreadsheet.Sheet;
 import org.jopendocument.dom.spreadsheet.SpreadSheet;
-
-
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+@SessionScope
 public class GDataDownload {
 
 

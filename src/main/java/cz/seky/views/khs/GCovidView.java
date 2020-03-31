@@ -15,13 +15,16 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.spring.annotation.UIScope;
 import cz.seky.backend.GDataDownload;
 import cz.seky.views.main.MainView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 
 @Route(value = "gspread", layout = MainView.class)
-
+@org.springframework.stereotype.Component
+@UIScope
 @PageTitle("COVID-INFO")
 public class GCovidView extends Div {
 

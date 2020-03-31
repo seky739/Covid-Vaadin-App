@@ -1,10 +1,29 @@
 package cz.seky.backend;
 
+import com.github.appreciated.apexcharts.ApexCharts;
+import com.github.appreciated.apexcharts.config.*;
+import com.github.appreciated.apexcharts.config.builder.ChartBuilder;
+import com.github.appreciated.apexcharts.config.builder.LegendBuilder;
+import com.github.appreciated.apexcharts.config.chart.Type;
+import com.github.appreciated.apexcharts.config.chart.Zoom;
+import com.github.appreciated.apexcharts.config.chart.builder.ZoomBuilder;
+import com.github.appreciated.apexcharts.config.grid.Row;
+import com.github.appreciated.apexcharts.config.legend.HorizontalAlign;
+import com.github.appreciated.apexcharts.config.series.SeriesType;
+import com.github.appreciated.apexcharts.config.stroke.Curve;
+import com.github.appreciated.apexcharts.config.subtitle.Align;
+import com.github.appreciated.apexcharts.helper.Series;
 import com.google.gson.Gson;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.spring.annotation.UIScope;
 import cz.seky.backend.objects.Infected;
 import cz.seky.backend.objects.MasterTested;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.Arrays;
+
+@SessionScope
 public class MzcrDownload {
 
     private static MzcrDownload instance;
@@ -14,6 +33,8 @@ public class MzcrDownload {
     String[] testedXaxisLabel;
     Label header;
 
+    ApexCharts apexCharts;
+
     Integer[] infectedData1;
     Integer[] infectedData2;
     String[] infectedXaxisLabel;
@@ -21,6 +42,9 @@ public class MzcrDownload {
     private MzcrDownload() {
     }
 
+    public ApexCharts getApexCharts() {
+        return apexCharts;
+    }
 
     public static MzcrDownload getInstance() {
         if (instance == null) {
@@ -56,6 +80,10 @@ public class MzcrDownload {
             testedData2[i]=dates.getData()[i].getTestFull();
             testedXaxisLabel[i]=dates.getData()[i].getDatum();
         }
+
+
+
+
     }
 
     private void prepareSecondChart(){
